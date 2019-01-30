@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Custom CSS form -->
+    <link href="/css/form-css.css" rel="stylesheet"/>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <form action="#" th:action="@{/pages/forms/add}" method="post"  th:object="${sale}">
+                                    <div class="form-group">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <tr>
+                                                    <td>
+                                                        <label>Pipeline
+                                                            <select class="form-control" th:field="*{pipeline}">
+                                                                <option value="New">New</option>
+                                                                <option value="Information Gathering">Information Gathering</option>
+                                                                <option value="Pesonal">Personal</option>
+                                                                <option value="Follow Up">Follow Up</option>
+                                                                <option value="Closing">Closing</option>
+                                                            </select>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>customerName<input type="text" class="form-control" name="rescued" minlength="3" maxlength="60" required="required" th:field="*{customerName}"></input></label>
+                                                    </td>
+                                                    <td>
+                                                        <label>contact<input type="number" class="form-control" name="rescued" th:field="*{contact}" required="required"></input></label>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label>industry<input type="text" class="form-control" name="rescued"  th:field="*{industry}" minlength="2" maxlength="60" required="required"></input></label>
+                                                    </td>
+                                                    <td>
+                                                        <label>customerMet<input type="text" class="form-control" name="rescued" th:field="*{customerMet}" minlength="3" maxlength="60" required="required"></input></label>
+                                                    </td>
+                                                    <td>
+                                                        <label>revenue<input type="text" class="form-control" name="rescued" th:field="*{revenue}" required="required"></input></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="submit" class="btn btn-default  monBoutonUpdate bouton-image" value="Update"></input>
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="@{/pages/forms}"><img src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-8/48/Go-back-icon.png"
+                                                                                                  class="img-responsive" alt="Update" /></a>
+                                                    </td>
+                                                    <td><input type="hidden" class="form-control" name="rescued" th:field="*{id}"></input></td>
+
+                                                </tr>
+                                                <!--<label>pipeline<input type="text" class="form-control" name="vaccinated" th:field="*{pipeline}"></input></label>-->
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Daily Sales Report (Table)
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-lastTran">
+                            <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>pipeline</th>
+                                <th>contact</th>
+                                <th>industry</th>
+                                <th>revenue</th>
+                                <th>customerMet</th>
+                                <th>Date</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="sale : ${sales}">
+                                <td th:text="${sale.customerName}">Text ...</td>
+                                <td th:text="${sale.pipeline}">Text ...</td>
+                                <td th:text="${sale.contact}">Text...</td>
+                                <td th:text="${sale.industry}">Text...</td>
+                                <td th:text="${sale.customerMet}">Text...</td>
+                                <td th:text="${sale.revenue}">Text...</td>
+                                <td th:text="${sale.sDate.myDate}">Text...</td>
+                                <td><a th:href="@{|/pages/forms/update/${sale.id}|}"><img src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Apps-system-software-update-icon.png"
+                                                                                          class="img-responsive" alt="Update" /></a> </td>
+                                <td><a th:href="@{|/pages/delete/${sale.id}|}"><img src="http://icons.iconarchive.com/icons/seanau/email/24/Delete-icon.png"
+                                                                              class="img-responsive" alt="Update" /></a></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+ </div>
+</div>
+
+
+</body>
+
+</html>

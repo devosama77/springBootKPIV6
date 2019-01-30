@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div th:replace="fragments/header :: header-css"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+    <div th:replace="fragments/header :: header"/>
+    <!-- Custom CSS form -->
+    <link href="/css/form-css.css" rel="stylesheet"/>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<h1 class="page-header">Forms</h1>-->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Form Input Revenue
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form action="#" th:action="@{/rev-forms/addA}" method="post"  th:object="${revenue}">
+                                    <div class="form-group col-lg-4">
+                                        <label for="product" class="cols-sm-2 control-label">Product </label>
+                                        <div class="cols-sm-6 ">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-inbox fa" aria-hidden="true"></i></span>
+                                                <select id="product" class="form-control" th:field="*{product}" pattern="^(?=\s*\S).*$"
+                                                        data-mismatch="Please add Number" required="required"
+                                                        oninvalid="this.setCustomValidity('Select Product')"
+                                                        oninput="setCustomValidity('')">
+                                                    <option value="">-SELECT-</option>
+                                                    <option value="CPO">CPO</option>
+                                                    <option value="SPO">SPO</option>
+                                                    <option value="WATER">WATER</option>
+                                                    <option value="CHEMICAL">CHEMICAL</option>
+                                                    <option value="sewerage disposal">Sewerage Disposal</option>
+                                                    <option value="Polymer Disposal">Polymer Disposal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="booking" class="cols-sm-2 control-label">Booking</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" id="booking" class="form-control" name="customer" maxlength="50" th:field="*{booking}"
+                                                       pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                       oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                       oninput="setCustomValidity('')">
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="tripDone" class="cols-sm-2 control-label">Trip Done</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                                <input type="number" id="tripDone" class="form-control" name="contact"  th:field="*{tripDone}" required="required"
+                                                       oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                       oninput="setCustomValidity('')">
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div  class="form-group col-lg-4">
+                                        <label for="revenue" class="cols-sm-2 control-label">Revenue</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa  fa-money fa" aria-hidden="true"></i></span>
+                                                <input type="text" id="revenue" class="form-control" name="Revenue" maxlength="60" th:field="*{revenue}"
+                                                       pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number"
+                                                       oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                       oninput="setCustomValidity('')">
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="form-group col-lg-4">
+                                        <label for="date" class="cols-sm-2 control-label">Date</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar fa" aria-hidden="true"></i></span>
+                                                <input type="date" id="date" class="form-control" name="date" maxlength="60" th:field="*{rDate.myDate}" required="required">
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <input id="button" type="submit" class="btn btn-primary btn-lg btn-block" value="Submit"></input>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+
+        <!--Lst weeks sales -->
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        all revenues (Table)
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-lastWeek">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Booking</th>
+                                <th>TripDone</th>
+                                <th>Revenue</th>
+                                <th>Date</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="revenue,itrStat: ${revenues}">
+                                <td th:text="${itrStat.index}">0</td>
+                                <td th:text="${revenue.product}">Text ...</td>
+                                <td th:text="${revenue.booking}">Text ...</td>
+                                <td th:text="${revenue.tripDone}">Text...</td>
+                                <td th:text="${revenue.revenue}">Text...</td>
+                                <td th:text="${revenue.rDate.myDate}">Text...</td>
+                                <td><a th:href="@{/rev-update-all(id=${revenue.id})}"><img src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Apps-system-software-update-icon.png"
+                                                                                            class="img-responsive" alt="Update" /></a> </td>
+                                <td><a th:href="@{|rev-delete-all/${revenue.id}|}"><img src="http://icons.iconarchive.com/icons/seanau/email/24/Delete-icon.png"
+                                                                                         class="img-responsive" alt="Update" /></a></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    $(document).ready(function() {
+
+        $('#dataTables-allSales').DataTable({
+            responsive: true
+        });
+
+        $('#dataTables-lastWeek').DataTable({
+            responsive: true
+        });
+
+        $('#dataTables-lastSale').DataTable({
+            responsive: true
+        });
+
+    });
+
+</script>
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+
+</body>
+
+</html>

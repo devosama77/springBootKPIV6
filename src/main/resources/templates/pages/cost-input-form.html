@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS form -->
+    <link href="/css/form-css.css" rel="stylesheet"/>
+    <div th:replace="fragments/header :: header-css"/>
+    <script src="js/jquery.validity.js"></script>
+    <script src="js/script.js"></script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        .size-label-text
+        {
+            font-size: 12px;
+        }
+    </style>
+    <meta charset="UTF-8"/>
+    <title>Cost</title>
+
+
+    <script>
+        function changSalary(obj) {
+            var v=obj.value;
+            if(v=="HOUR/ 8 HOUR"){
+                var parent=document.getElementById("salary");
+                var salaryId= document.getElementById("salaryId");
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.lastChild);
+                }
+                salaryId.removeAttribute("disabled");
+                salaryId.setAttribute("enabled",true);
+                option1=document.createElement("option");
+                option1.setAttribute("value","300");
+                option1.innerHTML="300";
+                salaryId.setAttribute("value","300");
+                parent.appendChild(option1);
+            }
+            else if(v=="TRIP/DISTANT"){
+                var parent=document.getElementById("salary");
+                var salaryId= document.getElementById("salaryId");
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.lastChild);
+                }
+                salaryId.removeAttribute("disabled");
+                salaryId.setAttribute("enabled",true);
+                option1=document.createElement("option");
+                option1.setAttribute("value","100");
+                option1.innerHTML="100";
+                option2=document.createElement("option");
+                option2.setAttribute("value","80");
+                option2.innerHTML="80";
+                salaryId.setAttribute("value","100");
+                parent.appendChild(option1);
+                parent.appendChild(option2);
+            }
+            else if(v=="20% of revenue"){
+                var salaryId= document.getElementById("salaryId");
+                var salary=document.getElementById("salary");
+                while (salary.hasChildNodes()) {
+                    salary.removeChild(salary.lastChild);
+                }
+                salaryId.setAttribute("value","0.0");
+                salaryId.innerHTML="0.0";
+               // salary.removeAttribute("enabled");
+               // salary.setAttribute("disabled",true);
+               salaryId.setAttribute("disabled",true);
+                salaryId.removeAttribute("enabled");
+
+
+            }
+
+        }
+        function changeWater(obj) {
+            var v=obj.value;
+            if(v=="IWK"){
+                var parent=document.getElementById("water");
+                var waterLIST=document.getElementById("waterList");
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.lastChild);
+                }
+                option1=document.createElement("option");
+                option1.setAttribute("value","148.5");
+                option1.innerHTML="148.5";
+                waterLIST.setAttribute("value","148.5");
+                waterLIST.innerHTML="148.5";
+                parent.appendChild(option1);
+            }
+            else if(v=="SAJ"){
+                var parent=document.getElementById("water");
+                var waterLIST=document.getElementById("waterList");
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.lastChild);
+                }
+                option1=document.createElement("option");
+                option1.setAttribute("value","200");
+                option1.innerHTML="200";
+                waterLIST.setAttribute("value","200");
+                waterLIST.innerHTML="200";
+                parent.appendChild(option1);
+            }else if(v=="SYABAS"){
+                var parent=document.getElementById("water");
+                var waterLIST=document.getElementById("waterList");
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.lastChild);
+                }
+                option1=document.createElement("option");
+                option1.setAttribute("value","178");
+                option1.innerHTML="178";
+                waterLIST.setAttribute("value","178");
+                waterLIST.innerHTML="178";
+                parent.appendChild(option1);
+            }
+        }
+    </script>
+    <script>
+
+        $(document).ready(function()
+        {
+            function updateDeliveryTime()
+            {
+                var buyer = parseFloat($("#buyer").val());
+                var mill = parseFloat($("#mill").val());
+                var base = parseFloat($("#base").val());
+                var total=buyer+mill+base;
+                var parseVloat=parseFloat(total);
+                var totalDelivery=parseVloat/80;
+                $("#delivery").val(totalDelivery);
+            }
+            $(document).on("change, keyup", "#buyer", updateDeliveryTime);
+            $(document).on("change, keyup", "#mill", updateDeliveryTime);
+            $(document).on("change, keyup", "#base", updateDeliveryTime);
+        });
+    </script>
+
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="fragments/header :: header"/>
+    <!-- Custom CSS form -->
+    <link href="/css/form-css.css" rel="stylesheet"/>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<h1 class="page-header">Forms</h1>-->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Form Input Cost
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form action="#" th:action="@{/result-cost}" method="post"  th:object="${cost}">
+
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <div class="form-group col-lg-2">
+                                                    <label for="sizeOfTanker" class="cols-sm-2 control-label size-label-text">Size of Tanker(<span style="color: red">m3</span>)</label>
+                                                    <div class="cols-sm-6 ">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-inbox fa" aria-hidden="true"></i></span>
+                                                            <select id="sizeOfTanker" class="form-control" th:field="*{sizeOfTanker}">
+                                                                <option value="10m3">10m3</option>
+                                                                <option value="20m3">20m3</option>
+                                                                <option value="33m3">33m3</option>
+                                                                <option value="40m3">40m3</option>
+                                                                <option value="50m3">50m3</option>
+                                                                <option value="Iso">Iso tank</option>
+                                                                <option value="Storage">Storage Tank</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-lg-2">
+                                                    <label for="dieselBaseRate" class="cols-sm-2 control-label size-label-text" >Diesel Base Rate(<span style="color: red">RM</span>)</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa-filter fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="dieselBaseRate" class="form-control" name="dieselBaseRate" value="0.0" th:field="*{dieselBaseRate}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                            <!--<span th:if="${#fields.hasErrors('dieselBaseRate')}" th:errors="*{dieselBaseRate}">Diesel BaseRate Error</span>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group col-lg-2">
+                                                    <label for="currentRate" class="cols-sm-2 control-label size-label-text">current Rate(<span style="color: red">RM</span>)</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-flask fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="currentRate" class="form-control" name="contact" value="0.0" th:field="*{currentRate}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="buyer" class="cols-sm-2 control-label size-label-text">Distance To Buyer (<span style="color: red">KM</span>)</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-fire fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="buyer" class="form-control" name="customer" value="0.0" th:field="*{distanceToBuyer}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            <!--<span th:if="${#fields.hasErrors('distanceToBuyer')}" th:errors="*{distanceToBuyer}">distanceToBuyer Error</span>-->
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="mill" class="cols-sm-2 control-label size-label-text">Distance To Mill (<span style="color: red">KM</span>)</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-arrows-h fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="mill" class="form-control" name="customer" value="0.0" th:field="*{distanceToMill}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            <!--<span th:if="${#fields.hasErrors('distanceToMill')}" th:errors="*{distanceToMill}">distance To Mill Error</span>-->
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="base" class="cols-sm-2 control-label size-label-text">Distance To Base</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-arrows-h fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="base" class="form-control" name="distanceToBase" value="0.0" th:field="*{distanceToBase}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                            <!--<span th:if="${#fields.hasErrors('distanceToBase')}" th:errors="*{distanceToBase}">Diesel BaseRate Error</span>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <div  class="form-group col-lg-2">
+                                                <label for="capacity" class="cols-sm-2 control-label size-label-text">Capacity(<span style="color: red">mt</span>)</label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-hourglass-end fa" aria-hidden="true"></i></span>
+                                                        <input type="text" id="capacity" class="form-control" name="capacity" value="0.0" th:field="*{capacity}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                               oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                               oninput="setCustomValidity('')">
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div  class="form-group col-lg-2">
+                                                <label for="standByTime" class="cols-sm-2 control-label size-label-text">Stand By Time( <span style="color: red">Hours</span>)</label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar fa" aria-hidden="true"></i></span>
+                                                        <input type="text" id="standByTime" class="form-control" name="capacity" value="0.0" th:field="*{standByTime}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                               oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                               oninput="setCustomValidity('')">
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div  class="form-group col-lg-2">
+                                                <label for="deliveryTime" class="cols-sm-2 control-label size-label-text" data-toggle="tooltip" data-placement="top" title="Time will affect Touch n'Go amount" >Delivery Time <span style="color: red">Hours</span></label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar fa" aria-hidden="true"></i></span>
+                                                        <input type="text" id="deliveryTime" class="form-control" name="deliveryTime" value="0.0" th:field="*{deliveryTime}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                               oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                               oninput="setCustomValidity('')">
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <div class="form-group col-lg-2">
+                                                    <label for="salariesString" class="cols-sm-2 control-label size-label-text" data-toggle="tooltip" data-placement="top" title="if you will choose Salary Revenue the value will be 0.0 and will calculate the salary from the pricing">
+                                                        SALARIES - DRIVERS(<span style="color: red">RM</span>)</label>
+                                                    <div class="cols-sm-6 ">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-money fa" aria-hidden="true"></i></span>
+                                                            <select id="salariesString" onchange="changSalary(this)" class="form-control" th:field="*{salariesString}">
+                                                                <option  value="TRIP/DISTANT" >TRIP/DISTANT</option>
+                                                                <option  value="HOUR/ 8 HOUR" >HOUR/ 8 HOUR</option>
+                                                                <option  value="20% of revenue" >20% of revenue</option>
+                                                            </select>
+                                                            <input type="text" list="salary" id ="salaryId"  value="0.0" class="form-control" name="waterList"  th:field="*{salaryList}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                            <datalist id="salary">
+                                                                <option  value="80" ></option>
+                                                                <option  value="100" ></option>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            <div  class="form-group col-lg-2">
+                                                <label for="salaryPerHour" class="cols-sm-2 control-label size-label-text" data-placement="top" >SALARIES - DRIVERS (HOUR OT / 1 HOUR)<span style="color: red">Hours</span></label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa  fa-money fa" aria-hidden="true"></i></span>
+                                                        <input type="text" id="salaryPerHour" class="form-control" name="salaryPerHour" value="0.0" th:field="*{salaryPerHour}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                               oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                               oninput="setCustomValidity('')">
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <div class="form-group col-lg-2">
+                                                    <label for="waterString" class="cols-sm-2 control-label size-label-text"><span style="color: blue">Variable Costs</span> Water(<span style="color: red">RM</span>)</label>
+                                                    <div class="cols-sm-6 ">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-money fa" aria-hidden="true"></i></span>
+                                                            <select id="waterString" class="form-control" onchange="changeWater(this)"  th:field="*{waterString}">
+                                                                <option  value="IWK" >IWK</option>
+                                                                <option  value="SAJ" >SAJ</option>
+                                                                <option  value="SYABAS" >SYABAS</option>
+                                                            </select>
+                                                            <input type="text" list="water" id="waterList" value="0.0" class="form-control" name="waterList"   th:field="*{waterList}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                            <datalist id="water">
+                                                                <option value="148.5"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="delivery" class="cols-sm-2 control-label size-label-text" data-toggle="tooltip" data-placement="top" title="Rent tanker from other contractors" >
+                                                        Rental Tanker ? <span style="color: red">RM</span></label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa  fa-money fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="delivery" class="form-control" name="rentalTanker" value="0.0" th:field="*{rentalTanker}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="disposalPlace" class="cols-sm-2 control-label size-label-text">
+                                                        Disposal Place<span style="color: red">RM</span></label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-location-arrow fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="disposalPlace"  value="0.0" class="form-control" name="disposalPlace" th:field="*{disposalPlace}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="washTanker" class="cols-sm-2 control-label size-label-text">
+                                                        Wash Tanker<span style="color: red">RM</span></label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-truck fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="washTanker"  value="0.0" class="form-control" name="washTanker" th:field="*{washTanker}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="form-group col-lg-2">
+                                                    <label for="washTanker" class="cols-sm-2 control-label size-label-text" >
+                                                        Mark up<span style="color: red">%</span></label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa  fa-money fa" aria-hidden="true"></i></span>
+                                                            <input type="text" id="markUpPrecentage"  value="0.0" class="form-control" name="markUpPrecentage" th:field="*{markUpPrecentage}" pattern="[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?" data-mismatch="Please add Number" required="required"
+                                                                   oninvalid="this.setCustomValidity('Invalid Number ..')"
+                                                                   oninput="setCustomValidity('')">
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                            <tr>
+                                                <td>
+
+                                                <div class="form-group col-lg-2">
+                                                    <input id="button" type="submit" class="btn btn-primary btn-lg btn-block" value="Submit"></input>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
+
+
+
+
+                                </form>
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!--Lst weeks sales -->
+
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+
+
+</body>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/jquery.validity.js"></script>
+<script src="js/script.js"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<script>
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+</html>
